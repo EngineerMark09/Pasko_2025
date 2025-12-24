@@ -163,23 +163,25 @@ function resetTextAnimations() {
 
 
 function initBackgroundMusic() {
-  var music = document.getElementById('bgMusic'); // Set volume to 33% for subtle background feel
+  var music = document.getElementById('bgMusic');
+  var revealBtn = document.getElementById('revealBtn'); // Set volume to 33% for subtle background feel
 
-  music.volume = 0.33; // Try to play immediately on page load
+  music.volume = 0.33; // Play music when user clicks "Open Message" button
 
-  music.play()["catch"](function (err) {
-    // If autoplay is blocked, play on first user interaction
-    console.log('Autoplay blocked, waiting for user interaction');
+  revealBtn.addEventListener('click', function () {
+    music.play()["catch"](function (err) {
+      console.log('Play failed:', err);
+    });
+  }); // Also try to play on any touch/click for mobile
 
-    var playOnInteraction = function playOnInteraction() {
-      music.play();
-      document.removeEventListener('click', playOnInteraction);
-      document.removeEventListener('touchstart', playOnInteraction);
-    };
+  var playOnce = function playOnce() {
+    music.play()["catch"](function () {});
+    document.removeEventListener('click', playOnce);
+    document.removeEventListener('touchstart', playOnce);
+  };
 
-    document.addEventListener('click', playOnInteraction);
-    document.addEventListener('touchstart', playOnInteraction);
-  });
+  document.addEventListener('click', playOnce);
+  document.addEventListener('touchstart', playOnce);
 }
 /**
  * ---------- Utility: Debounce Function ----------

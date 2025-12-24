@@ -176,24 +176,27 @@ function resetTextAnimations() {
  */
 function initBackgroundMusic() {
     const music = document.getElementById('bgMusic');
+    const revealBtn = document.getElementById('revealBtn');
     
     // Set volume to 33% for subtle background feel
     music.volume = 0.33;
     
-    // Try to play immediately on page load
-    music.play().catch(err => {
-        // If autoplay is blocked, play on first user interaction
-        console.log('Autoplay blocked, waiting for user interaction');
-        
-        const playOnInteraction = () => {
-            music.play();
-            document.removeEventListener('click', playOnInteraction);
-            document.removeEventListener('touchstart', playOnInteraction);
-        };
-        
-        document.addEventListener('click', playOnInteraction);
-        document.addEventListener('touchstart', playOnInteraction);
+    // Play music when user clicks "Open Message" button
+    revealBtn.addEventListener('click', () => {
+        music.play().catch(err => {
+            console.log('Play failed:', err);
+        });
     });
+    
+    // Also try to play on any touch/click for mobile
+    const playOnce = () => {
+        music.play().catch(() => {});
+        document.removeEventListener('click', playOnce);
+        document.removeEventListener('touchstart', playOnce);
+    };
+    
+    document.addEventListener('click', playOnce);
+    document.addEventListener('touchstart', playOnce);
 }
 
 /**
