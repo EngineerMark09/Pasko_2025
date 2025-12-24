@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize all components
   initParticles();
   initRevealInteraction();
-  initMusicPlayer();
+  initBackgroundMusic();
 });
 /**
  * ---------- Floating Light Particles ----------
@@ -157,55 +157,28 @@ function resetTextAnimations() {
   }
 }
 /**
- * ---------- Music Player ----------
- * Plays Bibingka by Ben&Ben when message is revealed
+ * ---------- Background Music ----------
+ * Plays Bibingka by Ben&Ben as subtle background music
  */
 
 
-function initMusicPlayer() {
-  var music = document.getElementById('bgMusic');
-  var musicToggle = document.getElementById('musicToggle');
-  var revealBtn = document.getElementById('revealBtn');
-  var isPlaying = false; // Set volume
+function initBackgroundMusic() {
+  var music = document.getElementById('bgMusic'); // Set volume to 33% for subtle background feel
 
-  music.volume = 0.4; // Play music when message is revealed
+  music.volume = 0.33; // Try to play immediately on page load
 
-  revealBtn.addEventListener('click', function () {
-    // Small delay to sync with animation
-    setTimeout(function () {
-      music.play().then(function () {
-        isPlaying = true;
-        musicToggle.classList.add('visible', 'playing');
-        musicToggle.classList.remove('muted');
-      })["catch"](function (err) {
-        console.log('Autoplay blocked:', err); // Show button anyway so user can click to play
+  music.play()["catch"](function (err) {
+    // If autoplay is blocked, play on first user interaction
+    console.log('Autoplay blocked, waiting for user interaction');
 
-        musicToggle.classList.add('visible', 'muted');
-      });
-    }, 500);
-  }); // Toggle music on button click
+    var playOnInteraction = function playOnInteraction() {
+      music.play();
+      document.removeEventListener('click', playOnInteraction);
+      document.removeEventListener('touchstart', playOnInteraction);
+    };
 
-  musicToggle.addEventListener('click', function () {
-    if (isPlaying) {
-      music.pause();
-      isPlaying = false;
-      musicToggle.classList.add('muted');
-      musicToggle.classList.remove('playing');
-    } else {
-      music.play().then(function () {
-        isPlaying = true;
-        musicToggle.classList.remove('muted');
-        musicToggle.classList.add('playing');
-      })["catch"](function (err) {
-        console.log('Play failed:', err);
-      });
-    }
-  }); // Update state when music ends (though it loops)
-
-  music.addEventListener('ended', function () {
-    isPlaying = false;
-    musicToggle.classList.add('muted');
-    musicToggle.classList.remove('playing');
+    document.addEventListener('click', playOnInteraction);
+    document.addEventListener('touchstart', playOnInteraction);
   });
 }
 /**
