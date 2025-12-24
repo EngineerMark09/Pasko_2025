@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A warm Pinoy Pasko greeting - Maligayang Pasko">
+    <title>Maligayang Pasko 🎄</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating light particles container -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Parol glow effects -->
+    <div class="parol-glow parol-glow-1"></div>
+    <div class="parol-glow parol-glow-2"></div>
+    <div class="parol-glow parol-glow-3"></div>
+
+    <main class="container">
+        <!-- Initial Landing View -->
+        <section class="landing" id="landing">
+            <div class="parol-icon">
+                <svg viewBox="0 0 120 160" class="parol-svg">
+                    <defs>
+                        <!-- Capiz shell gradient - pearlescent white -->
+                        <radialGradient id="capizShell" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95"/>
+                            <stop offset="50%" style="stop-color:#f5f0e6;stop-opacity:0.85"/>
+                            <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:0.7"/>
+                        </radialGradient>
+                        
+                        <!-- Inner glow for capiz -->
+                        <radialGradient id="capizGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#fff9e6;stop-opacity:0.9"/>
+                            <stop offset="60%" style="stop-color:#f5e6c8;stop-opacity:0.4"/>
+                            <stop offset="100%" style="stop-color:#e8d4a8;stop-opacity:0"/>
+                        </radialGradient>
+                        
+                        <!-- Pearlescent shimmer -->
+                        <linearGradient id="pearlShimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1"/>
+                            <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.4"/>
+                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.1"/>
+                        </linearGradient>
+                        
+                        <!-- Streamer gradients -->
+                        <linearGradient id="streamerCapiz" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f5f0e6"/>
+                            <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:0.5"/>
+                        </linearGradient>
+                        
+                        <!-- Soft glow filter -->
+                        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                        
+                        <!-- Shell texture filter -->
+                        <filter id="shellTexture">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
+                            <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="1" result="light">
+                                <feDistantLight azimuth="45" elevation="60"/>
+                            </feDiffuseLighting>
+                            <feBlend in="SourceGraphic" in2="light" mode="overlay"/>
+                        </filter>
+                    </defs>
+                    
+                    <!-- Background warm glow -->
+                    <circle cx="60" cy="50" r="50" fill="url(#capizGlow)" class="parol-glow-bg"/>
+                    
+                    <!-- Main Capiz Star Frame -->
+                    <g class="capiz-star" filter="url(#softGlow)">
+                        <!-- 8-pointed star outer frame -->
+                        <polygon class="capiz-frame" 
+                            points="60,2 70,30 98,22 78,45 105,50 78,55 98,78 70,70 60,98 50,70 22,78 42,55 15,50 42,45 22,22 50,30"
+                            fill="none" 
+                            stroke="#d4c4a8" 
+                            stroke-width="2"/>
+                        
+                        <!-- Capiz shell panels - 8 triangular sections -->
+                        <polygon class="capiz-panel" points="60,50 70,30 60,2 50,30" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 70,30 98,22 78,45" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 78,45 105,50 78,55" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 78,55 98,78 70,70" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 70,70 60,98 50,70" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 50,70 22,78 42,55" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 42,55 15,50 42,45" fill="url(#capizShell)"/>
+                        <polygon class="capiz-panel" points="60,50 42,45 22,22 50,30" fill="url(#capizShell)"/>
+                        
+                        <!-- Shimmer overlay -->
+                        <polygon class="capiz-shimmer" 
+                            points="60,2 70,30 98,22 78,45 105,50 78,55 98,78 70,70 60,98 50,70 22,78 42,55 15,50 42,45 22,22 50,30"
+                            fill="url(#pearlShimmer)"/>
+                        
+                        <!-- Inner frame lines -->
+                        <line x1="60" y1="50" x2="60" y2="2" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="98" y2="22" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="105" y2="50" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="98" y2="78" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="60" y2="98" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="22" y2="78" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="15" y2="50" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        <line x1="60" y1="50" x2="22" y2="22" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
+                        
+                        <!-- Center light bulb glow -->
+                        <circle cx="60" cy="50" r="10" fill="#fff9e6" class="center-glow"/>
+                        <circle cx="60" cy="50" r="6" fill="#ffffff" class="center-light"/>
+                    </g>
+                    
+                    <!-- Capiz Streamers (tails) -->
+                    <g class="parol-streamers">
+                        <path d="M42,90 Q38,115 35,148" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-1" stroke-linecap="round"/>
+                        <circle cx="35" cy="150" r="3" fill="#f5f0e6" class="streamer-end"/>
+                        
+                        <path d="M51,92 Q49,118 47,152" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-2" stroke-linecap="round"/>
+                        <circle cx="47" cy="154" r="3" fill="#f5f0e6" class="streamer-end"/>
+                        
+                        <path d="M60,95 Q60,122 60,155" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-3" stroke-linecap="round"/>
+                        <circle cx="60" cy="157" r="3" fill="#f5f0e6" class="streamer-end"/>
+                        
+                        <path d="M69,92 Q71,118 73,152" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-4" stroke-linecap="round"/>
+                        <circle cx="73" cy="154" r="3" fill="#f5f0e6" class="streamer-end"/>
+                        
+                        <path d="M78,90 Q82,115 85,148" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-5" stroke-linecap="round"/>
+                        <circle cx="85" cy="150" r="3" fill="#f5f0e6" class="streamer-end"/>
+                    </g>
+                </svg>
+            </div>
+            <h1 class="greeting-title">Maligayang Pasko</h1>
+            <p class="greeting-subtitle">A little message for you this Christmas</p>
+            <button class="reveal-btn" id="revealBtn">
+                <span>Open Message</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </section>
+
+        <!-- Message View (Hidden Initially) -->
+        <section class="message-section" id="messageSection">
+            <article class="message-card">
+                <div class="message-header">
+                    <div class="decorative-line"></div>
+                    <span class="message-date">Pasko 2025</span>
+                    <div class="decorative-line"></div>
+                </div>
+
+                <div class="message-content">
+                    <p class="message-text fade-in-text">
+                        Pasko na naman.
+                    </p>
+                    
+                    <p class="message-text fade-in-text">
+                        Ewan ko kung okay ka o hindi ngayon.
+                        Pero at least nakarating tayo dito, diba?
+                        That counts for something.
+                    </p>
+
+                    <p class="message-text fade-in-text">
+                        Wala naman akong masyadong sasabihin.
+                        Sana lang may oras ka magpahinga kahit today lang.
+                        Kumain ng maayos. Matulog ng maaga kung kaya.
+                    </p>
+
+                    <p class="message-text fade-in-text">
+                        Anyway, salamat sa this year.
+                        Sa lahat ng effort mo kahit walang pumapansin.
+                        Napansin ko naman.
+                    </p>
+
+                    <p class="message-text fade-in-text">
+                        Sana next year mas okay na.
+                        At kung hindi man, okay lang din.
+                        Andito pa rin naman tayo eh.
+                    </p>
+
+                    <p class="message-text fade-in-text closing-text">
+                        Merry Christmas!!🎄<br>
+                        Mag-iingat ka palagi🤍
+                    </p>
+                </div>
+
+                <footer class="message-footer">
+                    <div class="signature">
+                        <span class="signature-dash">—</span>
+                        <span class="signature-name">Mark Mingala</span>
+                    </div>
+                </footer>
+            </article>
+
+            <button class="back-btn" id="backBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Go Back</span>
+            </button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

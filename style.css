@@ -1,0 +1,692 @@
+/* ============================================
+   PINOY PASKO - Digital Christmas Card
+   A warm, simple Filipino Christmas greeting
+   ============================================ */
+
+/* ---------- CSS Variables (Color Palette) ---------- */
+:root {
+    /* Warm Parol-inspired colors */
+    --color-bg-deep: #1a0f0f;
+    --color-bg: #2d1810;
+    --color-bg-light: #3d2218;
+    
+    /* Accent colors - soft reds, yellows, greens */
+    --color-parol-red: #c44536;
+    --color-parol-red-soft: #a63d31;
+    --color-parol-yellow: #e8b923;
+    --color-parol-yellow-soft: #d4a520;
+    --color-parol-gold: #d4a373;
+    --color-parol-green: #4a6741;
+    --color-parol-green-soft: #3d5635;
+    
+    /* Text colors */
+    --color-text-primary: #f5ebe0;
+    --color-text-secondary: #d5c4a1;
+    --color-text-muted: #a89984;
+    
+    /* Glow effects */
+    --glow-yellow: rgba(232, 185, 35, 0.4);
+    --glow-red: rgba(196, 69, 54, 0.3);
+    --glow-soft: rgba(245, 235, 224, 0.1);
+    
+    /* Typography */
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    /* Spacing */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 4rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.8s ease;
+}
+
+/* ---------- Reset & Base Styles ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--color-bg-deep);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    
+    /* Subtle gradient background */
+    background: 
+        radial-gradient(ellipse at top, var(--color-bg) 0%, var(--color-bg-deep) 70%),
+        var(--color-bg-deep);
+}
+
+/* ---------- Floating Light Particles ---------- */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--color-parol-yellow);
+    border-radius: 50%;
+    opacity: 0;
+    animation: float-up 15s infinite;
+    box-shadow: 
+        0 0 6px var(--glow-yellow),
+        0 0 12px var(--glow-yellow);
+}
+
+@keyframes float-up {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh) scale(0.5);
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20vh) scale(1);
+    }
+}
+
+/* ---------- Parol Glow Effects (Background) ---------- */
+.parol-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+    animation: pulse-glow 8s ease-in-out infinite;
+}
+
+.parol-glow-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--color-parol-yellow);
+    top: -100px;
+    right: -50px;
+    animation-delay: 0s;
+}
+
+.parol-glow-2 {
+    width: 250px;
+    height: 250px;
+    background: var(--color-parol-red);
+    bottom: 10%;
+    left: -80px;
+    animation-delay: 2s;
+}
+
+.parol-glow-3 {
+    width: 200px;
+    height: 200px;
+    background: var(--color-parol-green);
+    bottom: -50px;
+    right: 20%;
+    animation-delay: 4s;
+    opacity: 0.2;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.4;
+        transform: scale(1.1);
+    }
+}
+
+/* ---------- Main Container ---------- */
+.container {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-md);
+}
+
+/* ---------- Landing Section ---------- */
+.landing {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    animation: fade-in 1.2s ease-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Parol Icon (SVG Star) - Capiz Style */
+.parol-icon {
+    width: 140px;
+    height: 180px;
+    animation: gentle-float 6s ease-in-out infinite;
+}
+
+.parol-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 30px rgba(255, 249, 230, 0.5));
+}
+
+.parol-glow-bg {
+    opacity: 0.6;
+    animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Capiz shell panels */
+.capiz-panel {
+    opacity: 0.85;
+    animation: shell-shimmer 5s ease-in-out infinite;
+}
+
+.capiz-panel:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.capiz-shimmer {
+    opacity: 0.3;
+    animation: shimmer-move 4s ease-in-out infinite;
+}
+
+.capiz-frame {
+    opacity: 0.8;
+}
+
+/* Center light effect */
+.center-glow {
+    animation: center-pulse 2s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.center-light {
+    animation: light-flicker 3s ease-in-out infinite;
+}
+
+/* Streamer animations */
+.parol-streamers .streamer {
+    stroke-linecap: round;
+}
+
+.streamer-1 { animation: sway 4s ease-in-out infinite; }
+.streamer-2 { animation: sway 4s ease-in-out infinite 0.3s; }
+.streamer-3 { animation: sway 4s ease-in-out infinite 0.6s; }
+.streamer-4 { animation: sway 4s ease-in-out infinite 0.9s; }
+.streamer-5 { animation: sway 4s ease-in-out infinite 1.2s; }
+
+.streamer-end {
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0%, 100% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(-2px) rotate(-1deg); }
+    75% { transform: translateX(2px) rotate(1deg); }
+}
+
+@keyframes glow-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.08); }
+}
+
+@keyframes center-pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes light-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.85; }
+    75% { opacity: 0.95; }
+}
+
+@keyframes shell-shimmer {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.95; }
+}
+
+@keyframes shimmer-move {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes gentle-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes star-glow {
+    0%, 100% {
+        opacity: 0.9;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Typography - Landing */
+.greeting-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 40px var(--glow-soft);
+}
+
+.greeting-subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: var(--color-text-muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-top: calc(var(--space-sm) * -1);
+}
+
+/* Reveal Button */
+.reveal-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg);
+    margin-top: var(--space-md);
+    
+    background: transparent;
+    border: 1px solid var(--color-parol-gold);
+    border-radius: 50px;
+    
+    color: var(--color-parol-gold);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.reveal-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(212, 163, 115, 0.2),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.reveal-btn:hover {
+    background: rgba(212, 163, 115, 0.1);
+    border-color: var(--color-parol-yellow-soft);
+    color: var(--color-text-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.reveal-btn:hover::before {
+    left: 100%;
+}
+
+.btn-arrow {
+    width: 18px;
+    height: 18px;
+    transition: transform var(--transition-fast);
+}
+
+.reveal-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* ---------- Message Section ---------- */
+.message-section {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 640px;
+    animation: message-reveal 0.8s ease-out;
+}
+
+.message-section.active {
+    display: flex;
+}
+
+@keyframes message-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message Card */
+.message-card {
+    background: rgba(45, 24, 16, 0.6);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 163, 115, 0.15);
+    border-radius: 16px;
+    padding: var(--space-xl) var(--space-lg);
+    width: 100%;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Message Header */
+.message-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.decorative-line {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--color-parol-gold),
+        transparent
+    );
+}
+
+.message-date {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* Message Content */
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.message-text {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 3vw, 1.25rem);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    text-align: left;
+}
+
+.message-text:first-child {
+    font-size: clamp(1.3rem, 4vw, 1.5rem);
+    color: var(--color-text-primary);
+    font-style: italic;
+}
+
+.closing-text {
+    margin-top: var(--space-sm);
+    color: var(--color-text-primary);
+    font-style: italic;
+}
+
+/* Fade-in animation for text paragraphs */
+.fade-in-text {
+    opacity: 0;
+    transform: translateY(15px);
+    animation: text-fade-in 0.6s ease-out forwards;
+}
+
+.fade-in-text:nth-child(1) { animation-delay: 0.2s; }
+.fade-in-text:nth-child(2) { animation-delay: 0.4s; }
+.fade-in-text:nth-child(3) { animation-delay: 0.6s; }
+.fade-in-text:nth-child(4) { animation-delay: 0.8s; }
+.fade-in-text:nth-child(5) { animation-delay: 1s; }
+.fade-in-text:nth-child(6) { animation-delay: 1.2s; }
+
+@keyframes text-fade-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message Footer / Signature */
+.message-footer {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(212, 163, 115, 0.1);
+}
+
+.signature {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+    opacity: 0;
+    animation: signature-reveal 0.6s ease-out 1.5s forwards;
+}
+
+@keyframes signature-reveal {
+    to {
+        opacity: 1;
+    }
+}
+
+.signature-dash {
+    color: var(--color-text-muted);
+}
+
+.signature-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-parol-gold);
+    letter-spacing: 0.02em;
+}
+
+/* Back Button */
+.back-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-xl);
+    padding: var(--space-xs) var(--space-sm);
+    
+    background: transparent;
+    border: none;
+    
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    opacity: 0;
+    animation: fade-in 0.5s ease-out 2s forwards;
+}
+
+.back-btn:hover {
+    color: var(--color-text-primary);
+}
+
+.back-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform var(--transition-fast);
+}
+
+.back-btn:hover svg {
+    transform: translateX(-4px);
+}
+
+/* ---------- Ambient Toggle ---------- */
+.ambient-toggle {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    width: 44px;
+    height: 44px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background: rgba(45, 24, 16, 0.6);
+    border: 1px solid rgba(212, 163, 115, 0.2);
+    border-radius: 50%;
+    
+    color: var(--color-parol-gold);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    z-index: 100;
+    opacity: 0;
+    animation: fade-in 1s ease-out 2s forwards;
+}
+
+.ambient-toggle:hover {
+    background: rgba(212, 163, 115, 0.15);
+    transform: scale(1.05);
+}
+
+.ambient-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: all var(--transition-medium);
+}
+
+.ambient-toggle.active svg {
+    color: var(--color-parol-yellow);
+    filter: drop-shadow(0 0 8px var(--glow-yellow));
+}
+
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+    .message-card {
+        padding: var(--space-lg) var(--space-md);
+    }
+    
+    .parol-glow-1 {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .parol-glow-2 {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .parol-glow-3 {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: var(--space-sm);
+    }
+    
+    .parol-icon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .message-card {
+        padding: var(--space-md);
+        border-radius: 12px;
+    }
+    
+    .decorative-line {
+        width: 25px;
+    }
+    
+    .ambient-toggle {
+        bottom: var(--space-sm);
+        right: var(--space-sm);
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .particle {
+        display: none;
+    }
+}
+
+/* ---------- Hidden State ---------- */
+.hidden {
+    display: none !important;
+}
