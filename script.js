@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize all components
     initParticles();
     initRevealInteraction();
-    initAmbientToggle();
+    initMusicPlayer();
 });
 
 /**
@@ -171,33 +171,58 @@ function resetTextAnimations() {
 }
 
 /**
- * ---------- Ambient Glow Toggle ----------
- * Toggles enhanced glow effects for a more immersive experience
+ * ---------- Music Player ----------
+ * Plays Bibingka by Ben&Ben when message is revealed
  */
-function initAmbientToggle() {
-    const toggle = document.getElementById('ambientToggle');
-    let isActive = true; // Start with ambient effects on
+function initMusicPlayer() {
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    const revealBtn = document.getElementById('revealBtn');
     
-    toggle.classList.add('active');
+    let isPlaying = false;
     
-    toggle.addEventListener('click', () => {
-        isActive = !isActive;
-        toggle.classList.toggle('active', isActive);
-        
-        // Toggle particle visibility
-        const particles = document.getElementById('particles');
-        particles.style.opacity = isActive ? '1' : '0.3';
-        
-        // Toggle glow intensity
-        const glows = document.querySelectorAll('.parol-glow');
-        glows.forEach(glow => {
-            glow.style.opacity = isActive ? '' : '0.1';
-        });
-        
-        // Provide subtle haptic feedback if available
-        if (navigator.vibrate) {
-            navigator.vibrate(10);
+    // Set volume
+    music.volume = 0.4;
+    
+    // Play music when message is revealed
+    revealBtn.addEventListener('click', () => {
+        // Small delay to sync with animation
+        setTimeout(() => {
+            music.play().then(() => {
+                isPlaying = true;
+                musicToggle.classList.add('visible', 'playing');
+                musicToggle.classList.remove('muted');
+            }).catch(err => {
+                console.log('Autoplay blocked:', err);
+                // Show button anyway so user can click to play
+                musicToggle.classList.add('visible', 'muted');
+            });
+        }, 500);
+    });
+    
+    // Toggle music on button click
+    musicToggle.addEventListener('click', () => {
+        if (isPlaying) {
+            music.pause();
+            isPlaying = false;
+            musicToggle.classList.add('muted');
+            musicToggle.classList.remove('playing');
+        } else {
+            music.play().then(() => {
+                isPlaying = true;
+                musicToggle.classList.remove('muted');
+                musicToggle.classList.add('playing');
+            }).catch(err => {
+                console.log('Play failed:', err);
+            });
         }
+    });
+    
+    // Update state when music ends (though it loops)
+    music.addEventListener('ended', () => {
+        isPlaying = false;
+        musicToggle.classList.add('muted');
+        musicToggle.classList.remove('playing');
     });
 }
 

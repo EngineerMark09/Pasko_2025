@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initialize all components
   initParticles();
   initRevealInteraction();
-  initAmbientToggle();
+  initMusicPlayer();
 });
 /**
  * ---------- Floating Light Particles ----------
@@ -157,31 +157,55 @@ function resetTextAnimations() {
   }
 }
 /**
- * ---------- Ambient Glow Toggle ----------
- * Toggles enhanced glow effects for a more immersive experience
+ * ---------- Music Player ----------
+ * Plays Bibingka by Ben&Ben when message is revealed
  */
 
 
-function initAmbientToggle() {
-  var toggle = document.getElementById('ambientToggle');
-  var isActive = true; // Start with ambient effects on
+function initMusicPlayer() {
+  var music = document.getElementById('bgMusic');
+  var musicToggle = document.getElementById('musicToggle');
+  var revealBtn = document.getElementById('revealBtn');
+  var isPlaying = false; // Set volume
 
-  toggle.classList.add('active');
-  toggle.addEventListener('click', function () {
-    isActive = !isActive;
-    toggle.classList.toggle('active', isActive); // Toggle particle visibility
+  music.volume = 0.4; // Play music when message is revealed
 
-    var particles = document.getElementById('particles');
-    particles.style.opacity = isActive ? '1' : '0.3'; // Toggle glow intensity
+  revealBtn.addEventListener('click', function () {
+    // Small delay to sync with animation
+    setTimeout(function () {
+      music.play().then(function () {
+        isPlaying = true;
+        musicToggle.classList.add('visible', 'playing');
+        musicToggle.classList.remove('muted');
+      })["catch"](function (err) {
+        console.log('Autoplay blocked:', err); // Show button anyway so user can click to play
 
-    var glows = document.querySelectorAll('.parol-glow');
-    glows.forEach(function (glow) {
-      glow.style.opacity = isActive ? '' : '0.1';
-    }); // Provide subtle haptic feedback if available
+        musicToggle.classList.add('visible', 'muted');
+      });
+    }, 500);
+  }); // Toggle music on button click
 
-    if (navigator.vibrate) {
-      navigator.vibrate(10);
+  musicToggle.addEventListener('click', function () {
+    if (isPlaying) {
+      music.pause();
+      isPlaying = false;
+      musicToggle.classList.add('muted');
+      musicToggle.classList.remove('playing');
+    } else {
+      music.play().then(function () {
+        isPlaying = true;
+        musicToggle.classList.remove('muted');
+        musicToggle.classList.add('playing');
+      })["catch"](function (err) {
+        console.log('Play failed:', err);
+      });
     }
+  }); // Update state when music ends (though it loops)
+
+  music.addEventListener('ended', function () {
+    isPlaying = false;
+    musicToggle.classList.add('muted');
+    musicToggle.classList.remove('playing');
   });
 }
 /**
