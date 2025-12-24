@@ -31,112 +31,53 @@
         <!-- Initial Landing View -->
         <section class="landing" id="landing">
             <div class="parol-icon">
-                <svg viewBox="0 0 120 160" class="parol-svg">
+                <svg viewBox="0 0 100 140" class="parol-svg">
                     <defs>
-                        <!-- Capiz shell gradient - pearlescent white -->
-                        <radialGradient id="capizShell" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95"/>
-                            <stop offset="50%" style="stop-color:#f5f0e6;stop-opacity:0.85"/>
-                            <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:0.7"/>
-                        </radialGradient>
-                        
-                        <!-- Inner glow for capiz -->
-                        <radialGradient id="capizGlow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" style="stop-color:#fff9e6;stop-opacity:0.9"/>
-                            <stop offset="60%" style="stop-color:#f5e6c8;stop-opacity:0.4"/>
-                            <stop offset="100%" style="stop-color:#e8d4a8;stop-opacity:0"/>
-                        </radialGradient>
-                        
-                        <!-- Pearlescent shimmer -->
-                        <linearGradient id="pearlShimmer" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1"/>
-                            <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.4"/>
-                            <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.1"/>
+                        <!-- Simple capiz gradient -->
+                        <linearGradient id="capiz" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#fffef5"/>
+                            <stop offset="100%" style="stop-color:#f0e6d0"/>
                         </linearGradient>
-                        
-                        <!-- Streamer gradients -->
-                        <linearGradient id="streamerCapiz" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#f5f0e6"/>
-                            <stop offset="100%" style="stop-color:#e8dcc8;stop-opacity:0.5"/>
+                        <linearGradient id="capizDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#f5edd8"/>
+                            <stop offset="100%" style="stop-color:#e0d4be"/>
                         </linearGradient>
-                        
-                        <!-- Soft glow filter -->
-                        <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="3" result="blur"/>
-                            <feMerge>
-                                <feMergeNode in="blur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                        
-                        <!-- Shell texture filter -->
-                        <filter id="shellTexture">
-                            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" result="noise"/>
-                            <feDiffuseLighting in="noise" lighting-color="#fff" surfaceScale="1" result="light">
-                                <feDistantLight azimuth="45" elevation="60"/>
-                            </feDiffuseLighting>
-                            <feBlend in="SourceGraphic" in2="light" mode="overlay"/>
-                        </filter>
                     </defs>
                     
-                    <!-- Background warm glow -->
-                    <circle cx="60" cy="50" r="50" fill="url(#capizGlow)" class="parol-glow-bg"/>
-                    
-                    <!-- Main Capiz Star Frame -->
-                    <g class="capiz-star" filter="url(#softGlow)">
-                        <!-- 8-pointed star outer frame -->
-                        <polygon class="capiz-frame" 
-                            points="60,2 70,30 98,22 78,45 105,50 78,55 98,78 70,70 60,98 50,70 22,78 42,55 15,50 42,45 22,22 50,30"
-                            fill="none" 
-                            stroke="#d4c4a8" 
-                            stroke-width="2"/>
+                    <!-- 5-Point Star - Traditional Parol Shape -->
+                    <g class="star-body">
+                        <!-- Main star points -->
+                        <polygon points="50,8 58,35 88,35 64,52 73,80 50,63 27,80 36,52 12,35 42,35" 
+                                 fill="url(#capiz)" 
+                                 stroke="#c9a227" 
+                                 stroke-width="1.5"/>
                         
-                        <!-- Capiz shell panels - 8 triangular sections -->
-                        <polygon class="capiz-panel" points="60,50 70,30 60,2 50,30" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 70,30 98,22 78,45" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 78,45 105,50 78,55" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 78,55 98,78 70,70" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 70,70 60,98 50,70" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 50,70 22,78 42,55" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 42,55 15,50 42,45" fill="url(#capizShell)"/>
-                        <polygon class="capiz-panel" points="60,50 42,45 22,22 50,30" fill="url(#capizShell)"/>
+                        <!-- Inner star for depth -->
+                        <polygon points="50,20 55,38 72,38 59,48 64,66 50,55 36,66 41,48 28,38 45,38" 
+                                 fill="url(#capizDark)" 
+                                 stroke="#c9a227" 
+                                 stroke-width="0.5" 
+                                 opacity="0.5"/>
                         
-                        <!-- Shimmer overlay -->
-                        <polygon class="capiz-shimmer" 
-                            points="60,2 70,30 98,22 78,45 105,50 78,55 98,78 70,70 60,98 50,70 22,78 42,55 15,50 42,45 22,22 50,30"
-                            fill="url(#pearlShimmer)"/>
-                        
-                        <!-- Inner frame lines -->
-                        <line x1="60" y1="50" x2="60" y2="2" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="98" y2="22" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="105" y2="50" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="98" y2="78" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="60" y2="98" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="22" y2="78" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="15" y2="50" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        <line x1="60" y1="50" x2="22" y2="22" stroke="#d4c4a8" stroke-width="0.5" opacity="0.6"/>
-                        
-                        <!-- Center light bulb glow -->
-                        <circle cx="60" cy="50" r="10" fill="#fff9e6" class="center-glow"/>
-                        <circle cx="60" cy="50" r="6" fill="#ffffff" class="center-light"/>
+                        <!-- Center glow -->
+                        <circle cx="50" cy="45" r="8" fill="#fff8dc" class="center-light"/>
+                        <circle cx="50" cy="45" r="4" fill="#ffffff"/>
                     </g>
                     
-                    <!-- Capiz Streamers (tails) -->
-                    <g class="parol-streamers">
-                        <path d="M42,90 Q38,115 35,148" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-1" stroke-linecap="round"/>
-                        <circle cx="35" cy="150" r="3" fill="#f5f0e6" class="streamer-end"/>
+                    <!-- Simple Tassels -->
+                    <g class="tassels">
+                        <line x1="35" y1="75" x2="30" y2="115" stroke="#c9a227" stroke-width="2" class="tassel t1"/>
+                        <line x1="43" y1="78" x2="40" y2="122" stroke="#d4a017" stroke-width="2" class="tassel t2"/>
+                        <line x1="50" y1="80" x2="50" y2="128" stroke="#c9a227" stroke-width="2" class="tassel t3"/>
+                        <line x1="57" y1="78" x2="60" y2="122" stroke="#d4a017" stroke-width="2" class="tassel t4"/>
+                        <line x1="65" y1="75" x2="70" y2="115" stroke="#c9a227" stroke-width="2" class="tassel t5"/>
                         
-                        <path d="M51,92 Q49,118 47,152" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-2" stroke-linecap="round"/>
-                        <circle cx="47" cy="154" r="3" fill="#f5f0e6" class="streamer-end"/>
-                        
-                        <path d="M60,95 Q60,122 60,155" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-3" stroke-linecap="round"/>
-                        <circle cx="60" cy="157" r="3" fill="#f5f0e6" class="streamer-end"/>
-                        
-                        <path d="M69,92 Q71,118 73,152" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-4" stroke-linecap="round"/>
-                        <circle cx="73" cy="154" r="3" fill="#f5f0e6" class="streamer-end"/>
-                        
-                        <path d="M78,90 Q82,115 85,148" stroke="url(#streamerCapiz)" stroke-width="4" fill="none" class="streamer streamer-5" stroke-linecap="round"/>
-                        <circle cx="85" cy="150" r="3" fill="#f5f0e6" class="streamer-end"/>
+                        <!-- Tassel ends -->
+                        <circle cx="30" cy="117" r="2.5" fill="#c9a227"/>
+                        <circle cx="40" cy="124" r="2.5" fill="#d4a017"/>
+                        <circle cx="50" cy="130" r="2.5" fill="#c9a227"/>
+                        <circle cx="60" cy="124" r="2.5" fill="#d4a017"/>
+                        <circle cx="70" cy="117" r="2.5" fill="#c9a227"/>
                     </g>
                 </svg>
             </div>
